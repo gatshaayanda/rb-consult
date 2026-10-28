@@ -4,7 +4,7 @@ import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
 
 export const runtime = "nodejs";
-const ALLOWED_ADMIN_EMAILS = new Set(["chikohoraknowledge4@gmail.com", "gatshaayanda@gmail.com"]);
+const ALLOWED_ADMIN_EMAILS = new Set((process.env.RB_ADMIN_EMAILS || "").split(",").map(value => value.trim().toLowerCase()).filter(Boolean));
 
 function getAdminApp() {
   if (getApps().length) return getApps()[0];
@@ -20,12 +20,12 @@ function getAdminApp() {
 export async function POST(request: Request) {
   try {
     const match = (request.headers.get("authorization") || "").match(/^Bearer\s+(.+)$/i);
-    if (!match) return NextResponse.json({ error: "Sign in with an authorized Africhiko email first." }, { status: 401 });
+    if (!match) return NextResponse.json({ error: "Sign in with an authorized RB Consultancy email first." }, { status: 401 });
     const app = getAdminApp();
     const decoded = await getAuth(app).verifyIdToken(match[1]);
     const email = String(decoded.email || "").trim().toLowerCase();
     if (!ALLOWED_ADMIN_EMAILS.has(email) || decoded.firebase?.sign_in_provider === "anonymous") {
-      return NextResponse.json({ error: "This account is not authorized for Africhiko workshop operations." }, { status: 403 });
+      return NextResponse.json({ error: "This account is not authorized for RB Consultancy workshop operations." }, { status: 403 });
     }
     const db = getFirestore(app);
     const adminRef = db.collection("admins").doc(decoded.uid);

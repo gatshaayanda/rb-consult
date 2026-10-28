@@ -36,34 +36,34 @@ importScripts(
   "/api/firebase/messaging-sw-config"
 );
 
-// Add FCM reception without changing Africhiko's existing install, cache, update,
+// Add FCM reception without changing RB Consultancy's existing install, cache, update,
 // or offline-fetch behaviour below.
 let africhikoMessaging = null;
 try {
-  const config = self.__AFRICHIKO_FIREBASE_CONFIG__;
+  const config = self.__RB_CONSULT_FIREBASE_CONFIG__;
   if (config && config.apiKey && config.projectId && config.messagingSenderId && config.appId) {
     if (!firebase.apps.length) firebase.initializeApp(config);
     africhikoMessaging = firebase.messaging();
     africhikoMessaging.onBackgroundMessage((payload) => {
       if (payload.notification) return;
       const data = payload.data || {};
-      return self.registration.showNotification(data.title || "Africhiko update", {
+      return self.registration.showNotification(data.title || "RB Consultancy update", {
         body: data.body || "There is an update to your project enquiry.",
-        icon: "/africhiko-icon.svg",
-        badge: "/africhiko-icon.svg",
-        tag: "africhiko-" + (data.enquiryId || "update"),
+        icon: "/rb-consult-icon.svg",
+        badge: "/rb-consult-icon.svg",
+        tag: "rb-consult-" + (data.enquiryId || "update"),
         data: { link: typeof data.link === "string" && data.link.startsWith("/") ? data.link : "/account" }
       });
     });
   } else {
-    console.warn("Africhiko Firebase Messaging web config is incomplete.");
+    console.warn("RB Consultancy Firebase Messaging web config is incomplete.");
   }
 } catch (error) {
-  console.warn("Africhiko background notifications could not initialize.", error);
+  console.warn("RB Consultancy background notifications could not initialize.", error);
 }
 
-const CACHE_NAME = "africhiko-shell-v1";
-const APP_SHELL = ["/", "/services", "/enquiry", "/basket", "/account", "/offline", "/africhiko-icon.svg"];
+const CACHE_NAME = "rb-consult-shell-v1";
+const APP_SHELL = ["/", "/services", "/enquiry", "/basket", "/account", "/offline", "/rb-consult-icon.svg"];
 const PUBLIC_MEDIA = ["/videos/enter.mp4", "/videos/gear.mp4", "/videos/outside.mp4"];
 
 self.addEventListener("install", event => {
