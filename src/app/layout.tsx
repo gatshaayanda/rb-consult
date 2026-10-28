@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   keywords: ["RB Consultancy", "Botswana VIP toilet hire", "VIP toilet trailers", "event sanitation", "handwashing"],
   alternates: { canonical: "/" },
   openGraph: { type: "website", url: siteUrl, siteName: "RB Consultancy", title: "RB Consultancy | VIP Toilet Trailer Hire", description: "VIP toilet trailer hire in Botswana. Tell us about your event and request a private quotation." },
-  twitter: { card: "summary", title: "RB Consultancy | Welding & Steel Fabrication", description: "VIP toilet trailer hire in Botswana. Tell us about your event and request a private quotation." },
+  twitter: { card: "summary", title: "RB Consultancy | VIP Toilet Trailer Hire", description: "VIP toilet trailer hire in Botswana. Tell us about your event and request a private quotation." },
   icons: { icon: "/icon.svg", apple: "/icon.svg" },
   manifest: "/manifest.webmanifest",
   appleWebApp: { capable: true, title: "RB Consultancy", statusBarStyle: "default" },

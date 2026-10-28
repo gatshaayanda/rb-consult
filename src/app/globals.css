@@ -228,3 +228,5 @@
  .af-account-state{padding:16px}
  .af-account-project-actions{flex-direction:column;gap:12px}
 }
+
+.af-catalogue-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:22px;text-align:center;background:linear-gradient(135deg,#e8f1ed,#f4ead5);color:#123d36}.af-catalogue-placeholder>span{display:grid;place-items:center;width:48px;height:48px;border:1px solid #b89c64;border-radius:50%;font-size:1.5rem;color:#0e6655}.af-catalogue-placeholder strong{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}.af-catalogue-placeholder small{font-size:.75rem;color:#4d625a}.af-service-art img,.af-service-art video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
