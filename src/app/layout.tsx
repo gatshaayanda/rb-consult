@@ -5,7 +5,7 @@ import PwaRegister from "@/app/pwa-register";
 import AfrichikoGuide from "@/components/AfrichikoGuide";
 import "./globals.css";
 import "./pwa.css";
-import "./rb-consult-experience.css";
+import "./africhiko-experience.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://rb-consult.vercel.app";
 
