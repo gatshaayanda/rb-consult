@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://namane-tyres.vercel.app";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://rb-consult.vercel.app";
 
 export default function robots(): MetadataRoute.Robots {
   return { rules: { userAgent: "*", allow: "/" }, sitemap: baseUrl + "/sitemap.xml", host: baseUrl };

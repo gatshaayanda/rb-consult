@@ -8,7 +8,7 @@ service cloud.firestore {
 
     function isAdmin() {
       return signedIn()
-        && request.auth.token.email in ['chikohoraknowledge4@gmail.com', 'Chikohoraknowledge4@gmail.com', 'gatshaayanda@gmail.com']
+        && request.auth.token.email_verified == true
         && exists(/databases/$(database)/documents/admins/$(request.auth.uid))
         && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.role in ['owner', 'staff'];
     }
@@ -114,6 +114,13 @@ service cloud.firestore {
         && request.resource.data.message.size() > 0
         && request.resource.data.message.size() <= 1000
         && request.resource.data.active is bool;
+      allow delete: if isAdmin();
+    }
+
+    // Private quote records are readable/writable only by authorized staff.
+    // Never place a quotation amount on a public catalogue or enquiry document.
+    match /privateQuotes/{enquiryId} {
+      allow read, create, update: if isAdmin();
       allow delete: if isAdmin();
     }
 

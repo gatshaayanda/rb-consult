@@ -1,56 +1,21 @@
-# Africhiko
+# RB Consultancy
 
-Africhiko is a customer-first steel fabrication and welding enquiry PWA for Botswana.
+Premium trailer-mounted VIP toilet and mobile ablution hire for events in Botswana.
 
-## Customer journey
+## Customer experience
+Browse hire options, select units, and send an enquiry with event date, location, event type/use, expected attendance, contact details and optional reference media. RB Consultancy reviews each enquiry and privately discusses pricing. An enquiry is not a confirmed booking. There is no public rate card, checkout or payment flow.
 
-1. Browse the service catalogue and indicative starting prices.
-2. Add services to a single project request, or describe a custom project.
-3. Submit contact details, project location, dimensions, materials and notes for review.
-4. After submission, create a customer account to keep enquiries associated with the same Firebase identity, or continue as a guest.
+Contact: 72245296 / 77661973. Instagram: @rbconsultancy9256.
 
-An enquiry is not a confirmed quotation or job. Africhiko reviews the details before discussing a quote.
+## Admin
+The /admin route supports authorized staff operations, enquiry review, catalogue CRUD and publishing image/video/PDF media. Admin access requires a server-only RB_ADMIN_EMAILS allowlist and Firebase Admin credentials.
 
-## Customer account
+## PWA
+The native install prompt and service-worker lifecycle are protected foundation behavior. Keep install mechanics, dismissal, responsive placement, caching and offline behavior intact; change identity/branding only unless the product owner approves a specific install change.
 
-The account page supports email/password sign-in and account creation. When a guest creates an account during the enquiry journey, the existing anonymous Firebase user is linked to the new credential so the customer identity and associated enquiries are preserved.
+## Stack and setup
+Next.js / React / TypeScript, Firebase Auth and Cloud Firestore, UploadThing, Vercel Analytics and Speed Insights.
 
-## Progressive web app
+Copy .env.example to .env.local and configure the dedicated RB Consultancy Firebase project, UploadThing token, actual NEXT_PUBLIC_BASE_URL, comma-separated RB_ADMIN_EMAILS and server-only FIREBASE_ADMIN_KEY. Never commit real environment files or service-account credentials. The product owner configures Firebase and Vercel; a Git push does not mean deployment succeeded.
 
-- The install card is dismissible and calls the browser's native install prompt when the browser provides one.
-- On iPhone and iPad, installation is handled through Safari's Share menu and **Add to Home Screen**; Chromium's `beforeinstallprompt` event is not a universal iOS installation mechanism.
-- The service worker uses an Africhiko-specific cache namespace to keep this app's cached shell separate from other projects.
-
-## Enquiry messages and push notifications
-
-Customers and workshop staff can exchange messages inside each enquiry. Customers see live status changes and can opt in to browser push updates; the workshop can opt in to new-enquiry and customer-message alerts. Push delivery is an additional channel: saving an enquiry or message does not depend on a push provider being available.
-
-Configure `NEXT_PUBLIC_FIREBASE_VAPID_KEY` with the **public** Web Push certificate key from Firebase Console → Project settings → Cloud Messaging → Web Push certificates. Enable the Firebase Cloud Messaging API for the same Africhiko Firebase project. Configure `FIREBASE_ADMIN_KEY` as a server-only Vercel environment variable using Africhiko’s service account JSON; never expose or commit it. The `NEXT_PUBLIC_FIREBASE_*` variables and VAPID public key are public client configuration, not secrets.
-
-After deploying the environment values, each customer or staff device must use **Enable notifications** from its account/dashboard and grant browser permission. Test both roles on separate devices/browser profiles, including a backgrounded or closed app. Browser push requires HTTPS and browser support; on iPhone/iPad, use Safari’s Add to Home Screen web-app experience and then grant notification permission where supported.
-
-## Operations
-
-The `/admin` route is the staff surface for reviewing enquiries and managing fabrication services. It depends on the Africhiko Firebase project configuration and the project's configured staff authorization.
-
-## Stack
-
-- Next.js 15 / React 19 / TypeScript
-- Firebase Authentication and Cloud Firestore
-- Firebase Storage for project reference uploads and service media
-- Progressive Web App support
-- Vercel Analytics and Speed Insights
-- Vercel deployment from GitHub `main`
-
-## Development
-
-Install dependencies and run the local development server:
-
-```bash
-npm install
-npm run dev
-```
-
-Before QA, configure the `NEXT_PUBLIC_FIREBASE_*` environment variables for the Africhiko Firebase project and verify the relevant Firestore and Storage rules. Run lint, type checks and a production build before considering the branch release-ready.
-
-Never commit `.env.local`, service-account credentials or other private secrets.
+Development: npm install, then npm run dev. When configuration is ready, run npx tsc --noEmit, npm run lint and npm run build.
