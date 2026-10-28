@@ -12,13 +12,13 @@ const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://rb-consult.vercel.a
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: "RB Consultancy | VIP Toilet Trailer Hire", template: "%s | RB Consultancy" },
-  description: "RB Consultancy — welding and steel fabrication in Botswana. Browse services and submit a project brief for review and quotation.",
+  description: "RB Consultancy provides premium VIP toilet trailer and mobile ablution hire for events in Botswana. Enquire for your event and receive a private quotation.",
   applicationName: "RB Consultancy",
   keywords: ["RB Consultancy", "Botswana VIP toilet hire", "VIP toilet trailers", "event sanitation", "handwashing"],
   alternates: { canonical: "/" },
-  openGraph: { type: "website", url: siteUrl, siteName: "RB Consultancy", title: "RB Consultancy | Welding & Steel Fabrication", description: "VIP toilet trailer hire in Botswana. Tell us about your event and request a private quotation." },
-  twitter: { card: "summary", title: "RB Consultancy | Welding & Steel Fabrication", description: "Welding and steel fabrication in Botswana. Tell us about your project and request a quotation." },
-  icons: { icon: "/rb-consult-icon.svg", apple: "/rb-consult-icon.svg" },
+  openGraph: { type: "website", url: siteUrl, siteName: "RB Consultancy", title: "RB Consultancy | VIP Toilet Trailer Hire", description: "VIP toilet trailer hire in Botswana. Tell us about your event and request a private quotation." },
+  twitter: { card: "summary", title: "RB Consultancy | Welding & Steel Fabrication", description: "VIP toilet trailer hire in Botswana. Tell us about your event and request a private quotation." },
+  icons: { icon: "/icon.svg", apple: "/icon.svg" },
   manifest: "/manifest.webmanifest",
   appleWebApp: { capable: true, title: "RB Consultancy", statusBarStyle: "default" },
 };

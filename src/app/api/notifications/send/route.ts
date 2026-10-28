@@ -5,7 +5,7 @@ import { notificationServices } from "@/lib/server/firebase-admin";
 export const runtime = "nodejs";
 
 const INVALID_TOKEN_CODES = new Set(["messaging/registration-token-not-registered", "messaging/invalid-registration-token"]);
-const ALLOWED_ADMIN_EMAILS = new Set(["chikohoraknowledge4@gmail.com", "gatshaayanda@gmail.com"]);
+const ALLOWED_ADMIN_EMAILS = new Set((process.env.RB_ADMIN_EMAILS || "").split(",").map(value => value.trim().toLowerCase()).filter(Boolean));
 
 export async function POST(request: Request) {
   try {
@@ -33,12 +33,12 @@ export async function POST(request: Request) {
       if (isAdmin || enquiry.customerId !== decoded.uid || enquiry.status !== "New") {
         return NextResponse.json({ error: "Only the owner of a newly saved enquiry can trigger its arrival alert." }, { status: 403 });
       }
-      title = "New Africhiko enquiry";
+      title = "New RB Consultancy enquiry";
       message = "A customer has submitted a project enquiry.";
       eventKey = "new-" + body.enquiryId;
     } else if (kind === "status") {
       if (!isAdmin) return NextResponse.json({ error: "Only workshop staff can send enquiry status alerts." }, { status: 403 });
-      title = "Africhiko enquiry update";
+      title = "RB Consultancy enquiry update";
       message = "Your enquiry status is now: " + String(enquiry.status || "Updated") + ".";
       eventKey = "status-" + body.enquiryId + "-" + String(enquiry.status || "updated") + "-" + String(enquiry.updatedAt || "");
     } else {
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
       if (savedMessage.senderUid !== decoded.uid || savedMessage.senderRole !== senderRole || (!isAdmin && enquiry.customerId !== decoded.uid)) {
         return NextResponse.json({ error: "You cannot notify participants about this message." }, { status: 403 });
       }
-      title = isAdmin ? "Message from Africhiko" : "New customer message";
+      title = isAdmin ? "Message from RB Consultancy" : "New customer message";
       message = String(savedMessage.body || "").slice(0, 500);
       eventKey = "message-" + body.messageId;
     }
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
     if (!recipientUids.length) return NextResponse.json({ sent: false, reason: "no-recipients" });
 
     const link = isAdmin ? "/account" : "/admin";
-    const publicUrl = process.env.AFRICHIKO_PUBLIC_URL || process.env.NEXT_PUBLIC_BASE_URL || "https://africhiko.vercel.app";
+    const publicUrl = process.env.AFRICHIKO_PUBLIC_URL || process.env.NEXT_PUBLIC_BASE_URL || "https://rb-consult.vercel.app";
     let successCount = 0;
     let failureCount = 0;
     let alreadyRequested = 0;
@@ -90,7 +90,7 @@ export async function POST(request: Request) {
           tokens: docs.map(item => String(item.data().token)),
           notification: { title, body: message },
           data: { title, body: message, link, enquiryId: body.enquiryId },
-          webpush: { fcmOptions: { link: publicUrl + link }, notification: { icon: "/africhiko-icon.svg", badge: "/africhiko-icon.svg", tag: "africhiko-" + body.enquiryId } },
+          webpush: { fcmOptions: { link: publicUrl + link }, notification: { icon: "/rb-consult-icon.svg", badge: "/rb-consult-icon.svg", tag: "rb-consult-" + body.enquiryId } },
         });
         successCount += result.successCount;
         failureCount += result.failureCount;
@@ -110,7 +110,7 @@ export async function POST(request: Request) {
     }
     return NextResponse.json({ sent: successCount > 0, successCount, failureCount, reason: successCount ? undefined : alreadyRequested ? "already-requested" : "no-registered-devices" });
   } catch (error) {
-    console.error("Africhiko push notification failed:", error);
+    console.error("RB Consultancy push notification failed:", error);
     return NextResponse.json({ error: error instanceof Error ? error.message : "Could not send the notification." }, { status: 400 });
   }
 }

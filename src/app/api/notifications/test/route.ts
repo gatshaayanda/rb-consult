@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { notificationServices } from "@/lib/server/firebase-admin";
 
 export const runtime = "nodejs";
-const ALLOWED_ADMIN_EMAILS = new Set(["chikohoraknowledge4@gmail.com", "gatshaayanda@gmail.com"]);
+const ALLOWED_ADMIN_EMAILS = new Set((process.env.RB_ADMIN_EMAILS || "").split(",").map(value => value.trim().toLowerCase()).filter(Boolean));
 
 export async function POST(request: Request) {
   try {
@@ -16,18 +16,18 @@ export async function POST(request: Request) {
     if (!tokens.docs.some(item => item.data().token === body.token)) return NextResponse.json({ sent: false, error: "This device token is not registered to your account." }, { status: 403 });
     const role = await db.collection("admins").doc(decoded.uid).get();
     const isAdmin = ALLOWED_ADMIN_EMAILS.has(String(decoded.email || "").trim().toLowerCase()) && role.exists && ["owner", "staff"].includes(String(role.data()?.role || "").toLowerCase());
-    const title = isAdmin ? "Africhiko workshop alerts are on" : "Africhiko notifications are on";
+    const title = isAdmin ? "RB Consultancy workshop alerts are on" : "RB Consultancy notifications are on";
     const message = isAdmin ? "This device is ready for enquiry and customer-message alerts." : "This device is ready for enquiry progress and workshop message alerts.";
-    const publicUrl = process.env.AFRICHIKO_PUBLIC_URL || process.env.NEXT_PUBLIC_BASE_URL || "https://africhiko.vercel.app";
+    const publicUrl = process.env.AFRICHIKO_PUBLIC_URL || process.env.NEXT_PUBLIC_BASE_URL || "https://rb-consult.vercel.app";
     const result = await messaging.send({
       token: body.token,
       notification: { title, body: message },
       data: { title, body: message, link: isAdmin ? "/admin" : "/account", test: "true" },
-      webpush: { fcmOptions: { link: publicUrl + (isAdmin ? "/admin" : "/account") }, notification: { tag: "africhiko-test", icon: "/africhiko-icon.svg", badge: "/africhiko-icon.svg" } },
+      webpush: { fcmOptions: { link: publicUrl + (isAdmin ? "/admin" : "/account") }, notification: { tag: "rb-consult-test", icon: "/rb-consult-icon.svg", badge: "/rb-consult-icon.svg" } },
     });
     return NextResponse.json({ sent: Boolean(result), acceptedByFcm: true });
   } catch (error) {
-    console.error("Africhiko test notification failed:", error);
-    return NextResponse.json({ sent: false, error: error instanceof Error ? error.message : "Africhiko could not request a test notification." }, { status: 400 });
+    console.error("RB Consultancy test notification failed:", error);
+    return NextResponse.json({ sent: false, error: error instanceof Error ? error.message : "RB Consultancy could not request a test notification." }, { status: 400 });
   }
 }
