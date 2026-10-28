@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { track } from "@vercel/analytics";
 import AfrichikoGuide from "@/components/AfrichikoGuide";
+import PrivateRatesManager from "@/components/PrivateRatesManager";
 import {useEffect,useRef,useState} from "react";
 import {useSearchParams} from "next/navigation";
 import {onAuthStateChanged,signInAnonymously,signInWithPopup,signInWithCustomToken,GoogleAuthProvider,linkWithPopup,signOut,type User} from "firebase/auth";
