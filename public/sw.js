@@ -49,8 +49,8 @@ try {
       const data = payload.data || {};
       return self.registration.showNotification(data.title || "RB Consultancy update", {
         body: data.body || "There is an update to your project enquiry.",
-        icon: "/rb-consult-icon.svg",
-        badge: "/rb-consult-icon.svg",
+        icon: "/icon.svg",
+        badge: "/icon.svg",
         tag: "rb-consult-" + (data.enquiryId || "update"),
         data: { link: typeof data.link === "string" && data.link.startsWith("/") ? data.link : "/account" }
       });
@@ -63,7 +63,7 @@ try {
 }
 
 const CACHE_NAME = "rb-consult-shell-v1";
-const APP_SHELL = ["/", "/services", "/enquiry", "/basket", "/account", "/offline", "/rb-consult-icon.svg"];
+const APP_SHELL = ["/", "/services", "/enquiry", "/basket", "/account", "/offline", "/icon.svg"];
 const PUBLIC_MEDIA = ["/videos/enter.mp4", "/videos/gear.mp4", "/videos/outside.mp4"];
 
 self.addEventListener("install", event => {

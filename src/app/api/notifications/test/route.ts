@@ -18,12 +18,12 @@ export async function POST(request: Request) {
     const isAdmin = ALLOWED_ADMIN_EMAILS.has(String(decoded.email || "").trim().toLowerCase()) && role.exists && ["owner", "staff"].includes(String(role.data()?.role || "").toLowerCase());
     const title = isAdmin ? "RB Consultancy workshop alerts are on" : "RB Consultancy notifications are on";
     const message = isAdmin ? "This device is ready for enquiry and customer-message alerts." : "This device is ready for enquiry progress and workshop message alerts.";
-    const publicUrl = process.env.AFRICHIKO_PUBLIC_URL || process.env.NEXT_PUBLIC_BASE_URL || "https://rb-consult.vercel.app";
+    const publicUrl = process.env.RB_CONSULT_PUBLIC_URL || process.env.NEXT_PUBLIC_BASE_URL || "https://rb-consult.vercel.app";
     const result = await messaging.send({
       token: body.token,
       notification: { title, body: message },
       data: { title, body: message, link: isAdmin ? "/admin" : "/account", test: "true" },
-      webpush: { fcmOptions: { link: publicUrl + (isAdmin ? "/admin" : "/account") }, notification: { tag: "rb-consult-test", icon: "/rb-consult-icon.svg", badge: "/rb-consult-icon.svg" } },
+      webpush: { fcmOptions: { link: publicUrl + (isAdmin ? "/admin" : "/account") }, notification: { tag: "rb-consult-test", icon: "/icon.svg", badge: "/icon.svg" } },
     });
     return NextResponse.json({ sent: Boolean(result), acceptedByFcm: true });
   } catch (error) {

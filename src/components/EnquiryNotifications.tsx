@@ -41,7 +41,7 @@ export function NotificationSettings({ user, role }: { user: User | null; role: 
         const body = payload.notification?.body || payload.data?.body || "There is an update to your enquiry.";
         const registration = await navigator.serviceWorker.ready;
         await registration.showNotification(title, {
-          body, icon: "/rb-consult-icon.svg", badge: "/rb-consult-icon.svg",
+          body, icon: "/icon.svg", badge: "/icon.svg",
           tag: "rb-consult-foreground-" + (payload.data?.enquiryId || "update"),
           data: { link: typeof payload.data?.link === "string" && payload.data.link.startsWith("/") ? payload.data.link : role === "admin" ? "/admin" : "/account" },
         });

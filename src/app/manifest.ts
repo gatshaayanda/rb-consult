@@ -13,8 +13,8 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: "en",
     categories: ["business", "events"],
     icons: [
-      { src: "/rb-consult-icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
-      { src: "/rb-consult-icon.svg", sizes: "any", type: "image/svg+xml", purpose: "maskable" }
+      { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
+      { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "maskable" }
     ]
   };
 }
