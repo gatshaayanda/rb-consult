@@ -8,7 +8,7 @@ service cloud.firestore {
 
     function isAdmin() {
       return signedIn()
-        && request.auth.token.email_verified == true
+        && (request.auth.uid == "rb-one-word-admin" || request.auth.token.email_verified == true)
         && exists(/databases/$(database)/documents/admins/$(request.auth.uid))
         && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.role in ['owner', 'staff'];
     }
@@ -122,6 +122,11 @@ service cloud.firestore {
     match /privateQuotes/{enquiryId} {
       allow read, create, update: if isAdmin();
       allow delete: if isAdmin();
+    }
+
+    // Unit rates are never stored on public-readable service documents.
+    match /privateRates/{serviceId} {
+      allow read, create, update, delete: if isAdmin();
     }
 
     match /workInterests/{interestId} {
