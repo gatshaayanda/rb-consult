@@ -230,3 +230,20 @@
 }
 
 .af-catalogue-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:22px;text-align:center;background:linear-gradient(135deg,#e8f1ed,#f4ead5);color:#123d36}.af-catalogue-placeholder>span{display:grid;place-items:center;width:48px;height:48px;border:1px solid #b89c64;border-radius:50%;font-size:1.5rem;color:#0e6655}.af-catalogue-placeholder strong{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}.af-catalogue-placeholder small{font-size:.75rem;color:#4d625a}.af-service-art img,.af-service-art video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* Private quotation rates: admin-only responsive editor */
+.af-admin-word-divider{display:flex;align-items:center;gap:12px;max-width:520px;margin:22px 0 8px;color:var(--muted);font-size:.72rem;font-weight:900;letter-spacing:.12em}
+.af-admin-word-divider:before,.af-admin-word-divider:after{content:"";height:1px;flex:1;background:var(--line)}
+.af-admin-word-form{max-width:520px;margin-top:8px}
+.af-admin-word-form label{display:grid;gap:8px;font-size:.82rem;font-weight:800}
+.af-admin-word-form input{width:100%;min-width:0;padding:13px 14px;border:1px solid #c9c3d2;border-radius:7px;background:#fff;color:var(--ink)}
+.af-admin-word-form .af-button{margin-top:4px}
+.af-private-rates-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));gap:14px;margin-top:18px}
+.af-private-rate-card{display:flex;flex-direction:column;gap:12px;min-width:0;padding:16px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.af-private-rate-card>div{display:grid;gap:5px}
+.af-private-rate-card>div strong{line-height:1.35}
+.af-private-rate-card small{color:var(--muted);font-size:.72rem;line-height:1.45}
+.af-private-rate-card label{display:grid;gap:6px;font-size:.76rem;font-weight:800}
+.af-private-rate-card input{width:100%;min-width:0;padding:12px;border:1px solid #c9c3d2;border-radius:7px;background:#fff;color:var(--ink)}
+.af-private-rate-card .af-button{width:100%;margin-top:auto}
+@media(max-width:620px){.af-private-rate-card{padding:14px}.af-admin-word-form{width:100%}}
