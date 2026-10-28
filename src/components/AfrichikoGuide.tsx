@@ -73,14 +73,14 @@ export default function AfrichikoGuide({ view: viewOverride }: Props = {}) {
     else if (/track|status|progress|enquir|request/.test(normalized)) say(view === "admin" ? "Open Enquiry operations to review requests and update their progress." : "Open My RB Consultancy to review enquiries linked to your Google account. Guest enquiries may need to be linked separately.");
     else if (/human|contact|phone|email|workshop/.test(normalized)) say("You can contact the workshop using the verified phone number or email shown in the site footer.");
     else if (/admin|service catalogue|announcement|publish|manage/.test(normalized)) say(view === "admin" ? "Use the shortcuts below to jump to the relevant Operations section." : "The Operations tools are for authorized workshop staff. You can still submit a project enquiry as a customer.");
-    else say("I’m RB Consultancy’s scripted project guide, not a live person or AI assistant. Try asking about a quote, your enquiry, weather, or contacting the workshop.");
+    else say("I’m RB Consultancy’s scripted event guide, not a live person or AI assistant. Try asking about a quote, your enquiry, weather, or contacting the workshop.");
   }
 
   const intro = view === "admin"
     ? "What needs your attention, Boss?"
     : view === "account"
       ? "Dumela! Need help with a project?"
-      : "Dumela! What are you planning to build?";
+      : "Dumela! What event are you planning?";
 
   return <div className="af-guide-root">
     {!open && teaser && <aside className="af-guide-teaser" aria-label="RB Consultancy project guide invitation">
@@ -103,7 +103,7 @@ export default function AfrichikoGuide({ view: viewOverride }: Props = {}) {
           <Link href="/#work" onClick={() => setOpen(false)}>See toilet units <ArrowRight size={15}/></Link>
         </>}
       </nav>
-      {view !== "admin" && <div className="af-guide-services"><span>EVENT HIRE SHORTCUTS</span><div><Link href="/enquiry?service=VIP%20trailer%20toilets" onClick={() => setOpen(false)}>VIP trailer toilets</Link><Link href="/enquiry?service=Handwashing%20%26%20hygiene" onClick={() => setOpen(false)}>Handwashing & hygiene</Link><Link href="/enquiry?service=Welding%20%26%20repairs" onClick={() => setOpen(false)}>Welding &amp; repairs</Link><Link href="/enquiry" onClick={() => setOpen(false)}>Other sanitation hire</Link></div></div>}
+      {view !== "admin" && <div className="af-guide-services"><span>EVENT HIRE SHORTCUTS</span><div><Link href="/enquiry?service=VIP%20trailer%20toilets" onClick={() => setOpen(false)}>VIP trailer toilets</Link><Link href="/enquiry?service=Handwashing%20%26%20hygiene" onClick={() => setOpen(false)}>Handwashing & hygiene</Link><Link href="/enquiry?service=VIP%20event%20sanitation" onClick={() => setOpen(false)}>VIP event sanitation</Link><Link href="/enquiry" onClick={() => setOpen(false)}>Other sanitation hire</Link></div></div>}
       <div className="af-guide-thread" aria-live="polite" aria-relevant="additions text">{messages.map(message => <p key={message.id} className={`af-guide-message af-guide-message-${message.from}`}>{message.text}</p>)}</div>
       <form className="af-guide-composer" onSubmit={sendText}><input value={input} onChange={event => setInput(event.target.value)} aria-label="Ask the RB Consultancy project guide" placeholder="Ask about toilet hire, availability or an enquiry…" maxLength={300}/><button type="submit" disabled={!input.trim()} aria-label="Send message"><Send size={17}/></button></form>
       <p className="af-guide-disclaimer">Scripted guidance. It does not send messages or change enquiry status.</p>
