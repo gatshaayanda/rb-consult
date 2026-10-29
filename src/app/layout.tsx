@@ -6,6 +6,7 @@ import AfrichikoGuide from "@/components/AfrichikoGuide";
 import "./globals.css";
 import "./pwa.css";
 import "./africhiko-experience.css";
+import "./pwa-brand.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://rb-consult.vercel.app";
 
