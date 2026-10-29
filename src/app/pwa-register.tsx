@@ -123,6 +123,7 @@ export default function PwaRegister({ initialEmbedded = false, initialAndroid = 
         {installPrompt ? "Install RB Consultancy" : "Add to Home Screen"} <span aria-hidden="true">↗</span>
       </button>
     </aside>}
+    {installCardDismissed && !standalone && !embedded && (Boolean(installPrompt) || iosSafari) && <button className="rb-install-reopen" type="button" onClick={() => setInstallCardDismissed(false)}>Install RB Consultancy ↗</button>}
     {iosHelpOpen && <div className="rb-install-overlay" role="presentation">
       <section className="rb-install-dialog" role="dialog" aria-modal="true" aria-labelledby="rb-ios-install-title">
         <button className="af-install-close" type="button" aria-label="Close install guidance" onClick={() => setIosHelpOpen(false)}>×</button>
