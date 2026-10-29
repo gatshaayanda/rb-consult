@@ -34,8 +34,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const userAgent = requestHeaders.get("user-agent") || "";
   const requestedWith = requestHeaders.get("x-requested-with") || "";
   const embedded = EMBEDDED_BROWSER_PATTERN.test(userAgent) ||
-    (/Android/i.test(userAgent) && /\\bwv\\b/i.test(userAgent)) ||
-    /^(com\\.whatsapp|com\\.instagram\\.android|com\\.facebook\\.katana|com\\.facebook\\.lite|com\\.facebook\\.orca)$/i.test(requestedWith);
+    (/Android/i.test(userAgent) && /\bwv\b/i.test(userAgent)) ||
+    /^(com\.whatsapp|com\.instagram\.android|com\.facebook\.katana|com\.facebook\.lite|com\.facebook\.orca)$/i.test(requestedWith);
   const android = /Android/i.test(userAgent);
   return <html lang="en"><body style={embedded ? { overflow: "hidden" } : undefined}><Script id="rb-early-install-capture" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: '(function(){window.addEventListener("beforeinstallprompt",function(event){var standalone=window.matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;if(standalone||window.__rbConsultPwaListenerReady===true)return;event.preventDefault();window.__rbConsultInstallPrompt=event;});})();' }} /><PwaRegister initialEmbedded={embedded} initialAndroid={android} />{children}<AfrichikoGuide /><Analytics /><SpeedInsights /></body></html>;
 }
