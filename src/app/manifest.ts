@@ -16,7 +16,6 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["business", "events"],
     prefer_related_applications: false,
     icons: [
-      { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
       { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" }
     ]
   };
