@@ -1,0 +1,42 @@
+/* RB Consultancy PWA installer branding. Keep the native install lifecycle in pwa-register.tsx unchanged. */
+.af-install-card {
+  border-color: #d8c9ea;
+  background: rgba(255, 255, 255, .98);
+  box-shadow: 0 14px 38px rgba(45, 25, 67, .2);
+}
+.af-install-mark {
+  background: #5d3b80;
+  color: #fff;
+}
+.af-install-mark span {
+  color: #16b9c9;
+}
+.af-install-close {
+  border-color: #d8c9ea;
+}
+.af-install-close:hover {
+  background: #f2eaff;
+  color: #4b286f;
+}
+.af-install-action {
+  border-color: #5d3b80;
+  background: #5d3b80;
+  color: #fff;
+}
+.af-install-action:hover {
+  border-color: #4b286f;
+  background: #4b286f;
+}
+.af-install-action span {
+  color: #5de0e9;
+}
+@media (max-width: 560px) {
+  .af-install-card {
+    left: 14px;
+    right: 14px;
+    bottom: 64px;
+    width: auto;
+    max-width: 390px;
+    margin: 0 auto;
+  }
+}
