@@ -27,6 +27,7 @@ function isIosSafari() {
 
 export default function PwaRegister({ initialEmbedded = false, initialAndroid = false }: { initialEmbedded?: boolean; initialAndroid?: boolean }) {
   const [offline, setOffline] = useState(false);
+  const [standalone, setStandalone] = useState(false);
   const [installPrompt, setInstallPrompt] = useState<InstallPrompt | null>(null);
   const [installCardDismissed, setInstallCardDismissed] = useState(false);
   const [iosHelpOpen, setIosHelpOpen] = useState(false);
@@ -36,6 +37,7 @@ export default function PwaRegister({ initialEmbedded = false, initialAndroid = 
   useEffect(() => {
     setOffline(!navigator.onLine);
     const env = environment();
+    setStandalone(env.standalone);
     const inEmbedded = initialEmbedded || env.embedded;
     setEmbedded(inEmbedded);
     setAndroidEmbedded((initialEmbedded && initialAndroid) || (env.embedded && env.android));
@@ -66,6 +68,7 @@ export default function PwaRegister({ initialEmbedded = false, initialAndroid = 
       setInstallPrompt(null);
       setIosHelpOpen(false);
       setInstallCardDismissed(true);
+      setStandalone(true);
     };
     window.addEventListener("appinstalled", installed);
     return () => {
@@ -103,7 +106,7 @@ export default function PwaRegister({ initialEmbedded = false, initialAndroid = 
     window.open(url, "_blank", "noopener,noreferrer");
   }
 
-  const showInstallCard = !environment().standalone && !embedded && !installCardDismissed &&
+  const showInstallCard = !standalone && !embedded && !installCardDismissed &&
     (Boolean(installPrompt) || isIosSafari());
 
   return <>
