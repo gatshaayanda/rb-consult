@@ -28,6 +28,7 @@ function isIosSafari() {
 export default function PwaRegister({ initialEmbedded = false, initialAndroid = false }: { initialEmbedded?: boolean; initialAndroid?: boolean }) {
   const [offline, setOffline] = useState(false);
   const [standalone, setStandalone] = useState(false);
+  const [iosSafari, setIosSafari] = useState(false);
   const [installPrompt, setInstallPrompt] = useState<InstallPrompt | null>(null);
   const [installCardDismissed, setInstallCardDismissed] = useState(false);
   const [iosHelpOpen, setIosHelpOpen] = useState(false);
@@ -38,6 +39,7 @@ export default function PwaRegister({ initialEmbedded = false, initialAndroid = 
     setOffline(!navigator.onLine);
     const env = environment();
     setStandalone(env.standalone);
+    setIosSafari(isIosSafari());
     const inEmbedded = initialEmbedded || env.embedded;
     setEmbedded(inEmbedded);
     setAndroidEmbedded((initialEmbedded && initialAndroid) || (env.embedded && env.android));
@@ -107,7 +109,7 @@ export default function PwaRegister({ initialEmbedded = false, initialAndroid = 
   }
 
   const showInstallCard = !standalone && !embedded && !installCardDismissed &&
-    (Boolean(installPrompt) || isIosSafari());
+    (Boolean(installPrompt) || iosSafari);
 
   return <>
     {offline && <div className="offlineBanner" role="status" aria-live="polite">Offline mode · previously visited pages may remain available. New enquiries need a connection to be confirmed.</div>}
