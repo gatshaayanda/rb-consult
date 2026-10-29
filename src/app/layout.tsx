@@ -29,14 +29,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: "#5d3b80", colorScheme: "light" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body><Script id="rb-early-install-capture" strategy="beforeInteractive">{\`
-(function () {
-  window.addEventListener("beforeinstallprompt", function (event) {
-    var standalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
-    if (standalone || window.__rbConsultPwaListenerReady === true) return;
-    event.preventDefault();
-    window.__rbConsultInstallPrompt = event;
-  });
-})();
-\`}</Script><PwaRegister />{children}<AfrichikoGuide /><Analytics /><SpeedInsights /></body></html>;
+  return <html lang="en"><body><Script id="rb-early-install-capture" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: '(function(){window.addEventListener("beforeinstallprompt",function(event){var standalone=window.matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;if(standalone||window.__rbConsultPwaListenerReady===true)return;event.preventDefault();window.__rbConsultInstallPrompt=event;});})();' }} /><PwaRegister />{children}<AfrichikoGuide /><Analytics /><SpeedInsights /></body></html>;
 }
