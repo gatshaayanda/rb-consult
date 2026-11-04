@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: { type: "website", url: siteUrl, siteName: "RB Consultancy", title: "RB Consultancy | VIP Toilet Trailer Hire", description: "VIP toilet trailer hire in Botswana. Tell us about your event and request a private quotation." },
   twitter: { card: "summary", title: "RB Consultancy | VIP Toilet Trailer Hire", description: "VIP toilet trailer hire in Botswana. Tell us about your event and request a private quotation." },
-  icons: { icon: [{ url: "/icon.svg", type: "image/svg+xml" }], apple: [{ url: "/icon.svg", type: "image/svg+xml" }] },
+  icons: { icon: [{ url: "/rb-consult-icon-192.svg", sizes: "192x192", type: "image/svg+xml" }, { url: "/rb-consult-icon-512.svg", sizes: "512x512", type: "image/svg+xml" }], apple: [{ url: "/rb-consult-apple-icon.svg", sizes: "180x180", type: "image/svg+xml" }] },
   manifest: "/manifest.webmanifest",
   appleWebApp: { capable: true, title: "RB Consultancy", statusBarStyle: "default" },
 };
