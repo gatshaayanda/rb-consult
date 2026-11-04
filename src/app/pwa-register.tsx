@@ -102,7 +102,8 @@ export default function PwaRegister({ initialEmbedded = false, initialAndroid = 
     const url = window.location.href;
     const env = environment();
     if (env.android) {
-      window.location.href = "intent://" + url.slice(url.indexOf("://") + 3) + "#Intent;scheme=https;package=com.android.chrome;end";
+      const target = new URL(url);
+      window.location.href = "intent://" + target.host + target.pathname + target.search + target.hash + "#Intent;scheme=" + target.protocol.slice(0, -1) + ";package=com.android.chrome;end";
       return;
     }
     window.open(url, "_blank", "noopener,noreferrer");
