@@ -16,7 +16,9 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["business", "events"],
     prefer_related_applications: false,
     icons: [
-      { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" }
+      { src: "/rb-consult-icon-192.svg", sizes: "192x192", type: "image/svg+xml", purpose: "any" },
+      { src: "/rb-consult-icon-512.svg", sizes: "512x512", type: "image/svg+xml", purpose: "any" },
+      { src: "/rb-consult-apple-icon.svg", sizes: "180x180", type: "image/svg+xml", purpose: "any" }
     ]
   };
 }
